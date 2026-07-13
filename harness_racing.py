@@ -15,7 +15,7 @@ ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
 
 
 def init_harness_racing(nb_horses):
-    return {(key + 1): [0, 0] for key in nb_horses}
+    return {(key + 1): [0, 0] for key in range(nb_horses)}
 
 
 def next_lap(horses_dictionary):
@@ -65,5 +65,7 @@ if __name__ == "__main__":
     inputUserType = input("Voulez-vous un tiercé, un quarté ou un quinté ? Ou 'stop' pour arrêter le programme:")
     while inputUserType != 'tiercé' and inputUserType != 'quarté' and inputUserType != 'quinté':
         inputUserType = input("SAISIE INCORRECT !\nSaisir 'tiercé' ou 'quarté' ou 'quinté':")
+
+    loop_harness_racing(init_harness_racing(inputUserHorses))
 
     exit(0)
