@@ -15,18 +15,36 @@ ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
 
 
 def init_harness_racing(nb_horses):
-    return {key: [0, 0] for key in nb_horses}
+    return {(key + 1): [0, 0] for key in nb_horses}
 
 
-def next_lap(all_horses):
-    for key, [speed, distance] in all_horses.items():
+def next_lap(horses_dictionary):
+    for key, [speed, distance] in horses_dictionary.items():
         if distance != 'D':
             dice_value = secrets.randbelow(6)
             if dice_value == 6 and speed == 6:
-                all_horses[key] = 'D'
+                horses_dictionary[key] = ['D', 'D']
             else:
-                all_horses[key] = [dice_value, ARRAY_SPEED_DICE[speed][dice_value]]
-    return all_horses
+                horses_dictionary[key] = [dice_value, ARRAY_SPEED_DICE[speed][dice_value]]
+    return horses_dictionary
+
+
+def race_status(horses_dictionary):
+    for key, [speed, distance] in horses_dictionary.items():
+        if distance == 'D':
+            print(f"Le cheval n°{key} est disqualifié.")
+        else:
+            print(f"Le cheval n°{key} est à vitesse {speed} avec {distance}m parcouru.")
+
+
+def loop_harness_racing(horses_dictionary):
+    time_race = 0
+    input("Veuillez appuyer sur Entrée pour commancer la course.")
+    while True:
+        horses_dictionary = next_lap(horses_dictionary)
+        time_race += 10
+        print(f"Après {time_race}\" de course, voici l'état de la course:")
+        race_status(horses_dictionary)
 
 
 def print_ranking(ranking, type_rank):
