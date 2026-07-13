@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import secrets
 
 ARRAY_SPEED_DICE = (
     (0, 1, 1, 1, 2, 2),
@@ -8,13 +9,24 @@ ARRAY_SPEED_DICE = (
     (-1, 0, 0, 1, 1, 1),
     (-1, 0, 0, 0, 1, 1),
     (-2, -1, 0, 0, 0, 1),
-    (-2, -1, 0, 0, 0, "D")
+    (-2, -1, 0, 0, 0, 'D')
 )
 ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
 
 
 def init_harness_racing(nb_horses):
     return dict.fromkeys(nb_horses, 0)
+
+
+def next_lap(all_horses):
+    for key, [speed, distance] in all_horses.items():
+        if distance != 'D':
+            dice_value = secrets.randbelow(6)
+            if dice_value == 6 and speed == 6:
+                all_horses[key] = 'D'
+            else:
+                all_horses[key] = [dice_value, ARRAY_SPEED_DICE[speed][dice_value]]
+    return all_horses
 
 
 def print_ranking(ranking, type_rank):
