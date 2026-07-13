@@ -15,7 +15,7 @@ ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
 
 
 def init_harness_racing(nb_horses):
-    return dict.fromkeys(nb_horses, 0)
+    return {key: [0, 0] for key in nb_horses}
 
 
 def next_lap(all_horses):
