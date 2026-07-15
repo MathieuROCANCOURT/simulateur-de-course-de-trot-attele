@@ -45,13 +45,34 @@ def race_status(horses_dictionary):
 
 def loop_harness_racing(horses_dictionary):
     time_race = 0
-    input("Veuillez appuyer sur Entrée pour commancer la course.")
+    ranking = []
     is_dq_or_arrived = [False for _ in range(len(horses_dictionary))]
+    input("Veuillez appuyer sur Entrée pour commancer la course.")
+
     while True:
         horses_dictionary, is_dq_or_arrived = next_lap(horses_dictionary, is_dq_or_arrived)
         time_race += 10
-        print(f"Après {time_race}\" de course, voici l'état de la course:")
+        print(f"Après {time_race // 60}'{time_race % 60}\" de course, voici l'état de la course:")
         race_status(horses_dictionary)
+
+        pre_ranking = sorted(
+            ((horse, distance) for horse, (_, distance) in horses_dictionary.items() if
+             int(distance) >= ALL_DISTANCE and not is_dq_or_arrived[int(horse) - 1]),
+            key=lambda tuple: tuple[1],
+            reverse=True
+        )
+
+        for horse, _ in pre_ranking:
+            is_dq_or_arrived[int(horse) - 1] = True
+        ranking = ranking + pre_ranking
+
+        print(is_dq_or_arrived, pre_ranking, ranking)
+        if all(is_dq_or_arrived):
+            break
+
+        input("Appuyer sur Entrée pour avancer la course.")
+
+    return ranking
 
 
 def print_ranking(ranking, type_rank):
@@ -73,6 +94,7 @@ if __name__ == "__main__":
     while inputUserType != 'tiercé' and inputUserType != 'quarté' and inputUserType != 'quinté':
         inputUserType = input("SAISIE INCORRECT !\nSaisir 'tiercé' ou 'quarté' ou 'quinté':")
 
-    loop_harness_racing(init_harness_racing(inputUserHorses))
+    tab_ranking = [horse for (horse, _) in loop_harness_racing(init_harness_racing(inputUserHorses))]
+    print_ranking(tab_ranking, inputUserType)
 
     exit(0)
