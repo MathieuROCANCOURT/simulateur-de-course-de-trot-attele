@@ -12,6 +12,7 @@ ARRAY_SPEED_DICE = (
     (-2, -1, 0, 0, 0, 'D')
 )
 ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
+ALL_DISTANCE = 2400
 
 
 def init_harness_racing(nb_horses):
@@ -36,6 +37,8 @@ def race_status(horses_dictionary):
     for key, [speed, distance] in horses_dictionary.items():
         if distance == 'D':
             print(f"Le cheval n°{key} est disqualifié.")
+        elif distance >= ALL_DISTANCE:
+            print(f"Le cheval n°{key} est arrivé")
         else:
             print(f"Le cheval n°{key} est à vitesse {speed} avec {distance}m parcouru.")
 
