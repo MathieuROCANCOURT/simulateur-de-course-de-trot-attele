@@ -27,6 +27,7 @@ def next_lap(horses_dictionary, is_dq_or_arrived):
 
             if add_speed == 'D':
                 is_dq_or_arrived[int(key) - 1] = True
+                horses_dictionary[key] = [speed, add_speed]
             else:
                 speed += add_speed
                 horses_dictionary[key] = [speed, distance + ARRAY_SPEED_DISTANCE[speed]]
@@ -58,7 +59,7 @@ def loop_harness_racing(horses_dictionary):
 
         pre_ranking = sorted(
             ((horse, distance) for horse, (_, distance) in horses_dictionary.items() if
-             int(distance) >= ALL_DISTANCE and not is_dq_or_arrived[int(horse) - 1]),
+             not is_dq_or_arrived[int(horse) - 1] and int(distance) >= ALL_DISTANCE),
             key=lambda tuple: tuple[1],
             reverse=True
         )
@@ -67,7 +68,6 @@ def loop_harness_racing(horses_dictionary):
             is_dq_or_arrived[int(horse) - 1] = True
         ranking = ranking + pre_ranking
 
-        print(is_dq_or_arrived, pre_ranking, ranking)
         if all(is_dq_or_arrived):
             break
 
