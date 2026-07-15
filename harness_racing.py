@@ -18,15 +18,18 @@ def init_harness_racing(nb_horses):
     return {(key + 1): [0, 0] for key in range(nb_horses)}
 
 
-def next_lap(horses_dictionary):
+def next_lap(horses_dictionary, is_dq_or_arrived):
     for key, [speed, distance] in horses_dictionary.items():
-        if distance != 'D':
+        if not is_dq_or_arrived[int(key) - 1]:
             dice_value = secrets.randbelow(6)
-            if dice_value == 6 and speed == 6:
-                horses_dictionary[key] = ['D', 'D']
+            add_speed = ARRAY_SPEED_DICE[speed][dice_value]
+
+            if add_speed == 'D':
+                is_dq_or_arrived[int(key) - 1] = True
             else:
-                horses_dictionary[key] = [dice_value, ARRAY_SPEED_DICE[speed][dice_value]]
-    return horses_dictionary
+                horses_dictionary[key] = [speed + add_speed, distance + ARRAY_SPEED_DISTANCE[speed]]
+
+    return horses_dictionary, is_dq_or_arrived
 
 
 def race_status(horses_dictionary):
@@ -40,8 +43,9 @@ def race_status(horses_dictionary):
 def loop_harness_racing(horses_dictionary):
     time_race = 0
     input("Veuillez appuyer sur Entrée pour commancer la course.")
+    is_dq_or_arrived = [False for _ in range(len(horses_dictionary))]
     while True:
-        horses_dictionary = next_lap(horses_dictionary)
+        horses_dictionary, is_dq_or_arrived = next_lap(horses_dictionary, is_dq_or_arrived)
         time_race += 10
         print(f"Après {time_race}\" de course, voici l'état de la course:")
         race_status(horses_dictionary)
