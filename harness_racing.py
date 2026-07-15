@@ -60,7 +60,7 @@ def loop_harness_racing(horses_dictionary):
         pre_ranking = sorted(
             ((horse, distance) for horse, (_, distance) in horses_dictionary.items() if
              not is_dq_or_arrived[int(horse) - 1] and int(distance) >= ALL_DISTANCE),
-            key=lambda tuple: tuple[1],
+            key=lambda value: value[1],
             reverse=True
         )
 
@@ -81,7 +81,7 @@ def print_ranking(ranking, type_rank):
     top_ranking = dict_type[type_rank]
     for rank in range(top_ranking):
         output += str(ranking[rank]) + " - "
-    return output[:-3]
+    print(output[:-3])
 
 
 if __name__ == "__main__":
