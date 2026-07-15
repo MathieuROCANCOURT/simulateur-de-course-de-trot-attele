@@ -28,7 +28,8 @@ def next_lap(horses_dictionary, is_dq_or_arrived):
             if add_speed == 'D':
                 is_dq_or_arrived[int(key) - 1] = True
             else:
-                horses_dictionary[key] = [speed + add_speed, distance + ARRAY_SPEED_DISTANCE[speed]]
+                speed += add_speed
+                horses_dictionary[key] = [speed, distance + ARRAY_SPEED_DISTANCE[speed]]
 
     return horses_dictionary, is_dq_or_arrived
 
