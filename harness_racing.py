@@ -6,6 +6,12 @@ ALL_DISTANCE = 2400
 
 
 def init_harness_racing(nb_horses):
+    """
+    Create a dictionary of horses that lists their speed and the distance traveled
+
+    :param nb_horses: Number of horses in the race.
+    :return: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
+    """
     return {(key + 1): [0, 0] for key in range(nb_horses)}
 
 
