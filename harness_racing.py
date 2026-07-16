@@ -69,6 +69,12 @@ def race_status(horses_dictionary):
 
 
 def race_status_progress_bar(horses_dictionary):
+    """
+    Displays to the user with progress bar each horse's speed, the distance traveled, and whether it finished the race
+    or was disqualified.
+
+    :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
+    """
     bars = {
         horse: tqdm(
             total=2400,
