@@ -44,7 +44,7 @@ def next_lap(horses_dictionary, is_dq_or_arrived):
 
             if add_speed == 'D':
                 is_dq_or_arrived[int(key) - 1] = True
-                horses_dictionary[key] = [speed, add_speed]
+                horses_dictionary[key] = [add_speed, distance]
             else:
                 speed += add_speed
                 horses_dictionary[key] = [speed, distance + ARRAY_SPEED_DISTANCE[speed]]
@@ -60,7 +60,7 @@ def race_status(horses_dictionary):
     :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
     """
     for key, [speed, distance] in horses_dictionary.items():
-        if distance == 'D':
+        if speed == 'D':
             print(f"Le cheval n°{key} est disqualifié.")
         elif distance >= ALL_DISTANCE:
             print(f"Le cheval n°{key} est arrivé")
@@ -89,18 +89,18 @@ def race_status_progress_bar(horses_dictionary):
     }
 
     for horse in horses_dictionary.keys():
-        distance = horses_dictionary[horse][1]
-        if distance != 'D':
+        speed, distance = horses_dictionary[horse]
+        if speed != 'D':
             bars[horse].n = min(distance, ALL_DISTANCE)
             bars[horse].set_postfix_str(
-                f"vitesse={horses_dictionary[horse][0]}",
+                f"vitesse={speed}",
                 refresh=False
             )
             if distance >= ALL_DISTANCE:
                 bars[horse].colour = "GREEN"
 
         else:
-            bars[horse].n = 0
+            bars[horse].n = distance
             bars[horse].colour = "red"
             bars[horse].set_postfix_str(
                 "Disqualifier",
@@ -127,7 +127,7 @@ def loop_harness_racing(horses_dictionary):
         horses_dictionary, is_dq_or_arrived = next_lap(horses_dictionary, is_dq_or_arrived)
         time_race += 10
         print(f"Après {time_race // 60}'{time_race % 60}\" de course, voici l'état de la course:")
-        race_status(horses_dictionary)
+        race_status_progress_bar(horses_dictionary)
 
         pre_ranking = sorted(
             ((horse, distance) for horse, (_, distance) in horses_dictionary.items() if
