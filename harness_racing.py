@@ -2,16 +2,6 @@
 # -*- coding: utf-8 -*-
 import secrets
 
-ARRAY_SPEED_DICE = (
-    (0, 1, 1, 1, 2, 2),
-    (0, 0, 1, 1, 1, 2),
-    (0, 0, 1, 1, 1, 2),
-    (-1, 0, 0, 1, 1, 1),
-    (-1, 0, 0, 0, 1, 1),
-    (-2, -1, 0, 0, 0, 1),
-    (-2, -1, 0, 0, 0, 'D')
-)
-ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
 ALL_DISTANCE = 2400
 
 
@@ -20,6 +10,17 @@ def init_harness_racing(nb_horses):
 
 
 def next_lap(horses_dictionary, is_dq_or_arrived):
+    ARRAY_SPEED_DICE = (
+        (0, 1, 1, 1, 2, 2),
+        (0, 0, 1, 1, 1, 2),
+        (0, 0, 1, 1, 1, 2),
+        (-1, 0, 0, 1, 1, 1),
+        (-1, 0, 0, 0, 1, 1),
+        (-2, -1, 0, 0, 0, 1),
+        (-2, -1, 0, 0, 0, 'D')
+    )
+    ARRAY_SPEED_DISTANCE = (0, 23, 46, 69, 92, 115, 138)
+
     for key, [speed, distance] in horses_dictionary.items():
         if not is_dq_or_arrived[int(key) - 1]:
             dice_value = secrets.randbelow(6)
