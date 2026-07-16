@@ -52,6 +52,12 @@ def next_lap(horses_dictionary, is_dq_or_arrived):
 
 
 def race_status(horses_dictionary):
+    """
+    Displays to the user each horse's speed, the distance traveled, and whether it finished the race or was
+    disqualified.
+
+    :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
+    """
     for key, [speed, distance] in horses_dictionary.items():
         if distance == 'D':
             print(f"Le cheval n°{key} est disqualifié.")
