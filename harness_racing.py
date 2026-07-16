@@ -16,6 +16,15 @@ def init_harness_racing(nb_horses):
 
 
 def next_lap(horses_dictionary, is_dq_or_arrived):
+    """
+    Determine the horse's speed and the distance traveled based on the roll of the dice (0 to 5 in this function, for
+    simplicity).
+    The horse must be disqualified if both its speed and dice toll are 6.
+
+    :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
+    :param is_dq_or_arrived: Boolean array
+    :return: New horses_dictionary and is_dq_or_arrived statuses
+    """
     ARRAY_SPEED_DICE = (
         (0, 1, 1, 1, 2, 2),
         (0, 0, 1, 1, 1, 2),
