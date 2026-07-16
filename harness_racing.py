@@ -106,6 +106,12 @@ def loop_harness_racing(horses_dictionary):
 
 
 def print_ranking(ranking, type_rank):
+    """
+    Displays the top three, four, or five in the race.
+
+    :param ranking: Horse ranking array
+    :param type_rank: The user who entered “tiercé,” “quarté,” or "quinté".
+    """
     output, dict_type = "", {"tiercé": 3, "quarté": 4, "quinté": 5}
     top_ranking = dict_type[type_rank]
     for rank in range(top_ranking):
