@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import secrets
+from rainbow_tqdm import tqdm
 
 ALL_DISTANCE = 2400
 
@@ -65,6 +66,42 @@ def race_status(horses_dictionary):
             print(f"Le cheval n°{key} est arrivé")
         else:
             print(f"Le cheval n°{key} est à vitesse {speed} avec {distance}m parcouru.")
+
+
+def race_status_progress_bar(horses_dictionary):
+    bars = {
+        horse: tqdm(
+            total=2400,
+            desc=f"Cheval {horse}",
+            position=int(horse) - 1,
+            colour="CYAN",
+            leave=True,
+            dynamic_ncols=True,
+            bar_format="{desc:<10} {percentage:3.0f}%|{bar}|{n_fmt}m/{total_fmt}m {postfix}"
+        )
+        for horse in horses_dictionary.keys()
+    }
+
+    for horse in horses_dictionary.keys():
+        distance = horses_dictionary[horse][1]
+        if distance != 'D':
+            bars[horse].n = min(distance, ALL_DISTANCE)
+            bars[horse].set_postfix_str(
+                f"vitesse={horses_dictionary[horse][0]}",
+                refresh=False
+            )
+            if distance >= ALL_DISTANCE:
+                bars[horse].colour = "GREEN"
+
+        else:
+            bars[horse].n = 0
+            bars[horse].colour = "red"
+            bars[horse].set_postfix_str(
+                "Disqualifier",
+                refresh=False
+            )
+    for bar in bars.values():
+        bar.close()
 
 
 def loop_harness_racing(horses_dictionary):
