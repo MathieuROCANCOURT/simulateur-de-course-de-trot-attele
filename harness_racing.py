@@ -68,6 +68,13 @@ def race_status(horses_dictionary):
 
 
 def loop_harness_racing(horses_dictionary):
+    """
+    Continue the race when the user presses “Enter” to display the race status 10 seconds later.
+    The race ends when all the horses have crossed the finish line or have been disqualified.
+
+    :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
+    :return: Horse ranking array
+    """
     time_race = 0
     ranking = []
     is_dq_or_arrived = [False for _ in range(len(horses_dictionary))]
