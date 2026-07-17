@@ -13,16 +13,15 @@ cheval soit disqualifié pour avoir était trop vite.
 Voici le tableau qui indique les évolutions de la vitesse d'un cheval en fonction de sa vitesse actuelle et du jet de
 dé.
 
-
-<table style="border-collapse: collapse;">
-    <tr>
-        <td></td>
-        <td></td>
+<table style="text-align: center; border-collapse: collapse;">
+    <tr style="border-top: none; border-left: none; border-bottom: none;">
+        <th style="border: none"></th>
+        <th style="border-top: none; border-left: none; border-bottom: none;"></th>
         <th colspan="6" style="background-color: lightcyan">Jet de dé</th>
     </tr>
-    <tr>
-        <td></td>
-        <td></td>
+    <tr style="border-top: none; border-left: none; border-bottom: none;">
+        <td style="border: none;"></td>
+        <td style="border-top: none; border-left: none; border-bottom: none;"></td>
         <td>1</td>
         <td>2</td>
         <td>3</td>
@@ -103,14 +102,13 @@ dé.
 
 De même, voici le tableau qui permet la distance parcourue en 10" en fonction de la vitesse à avancer du cheval.
 
-<table style="border-collapse: collapse;">
-    <tr>
-        <td></td>
-        <td></td>
-        <th colspan="6" style="background-color: lightcyan">Jet de dé</th>
+<table style="text-align: center; border-collapse: collapse;">
+    <tr style="border-top: none; border-left: none; border-bottom: none;">
+        <th style="border: none"></th>
+        <th colspan="7" style="background-color: lightcyan">Jet de dé</th>
     </tr>
-    <tr>
-        <td></td>
+    <tr style="border-top: none; border-left: none; border-bottom: none;">
+        <td style="border: none"></td>
         <td>0</td>
         <td>1</td>
         <td>2</td>
