@@ -75,12 +75,14 @@ def race_status_progress_bar(horses_dictionary):
 
     :param horses_dictionary: A dictionary whose key is the horse's bib number and whose values are [speed, distance]
     """
+    # A progress bar displaying different shades of blue depending on the horse's speed
+    COLOR = ("#1afcb8", "#1adcb8", "#1abcb8", "#1a9cb8", "#1a7cb8", "#1a5cb8", "#1a3cb8")
+
     bars = {
         horse: tqdm(
             total=2400,
             desc=f"Cheval {horse}",
             position=int(horse) - 1,
-            colour="CYAN",
             leave=True,
             dynamic_ncols=True,
             bar_format="{desc:<10} {percentage:3.0f}%|{bar}|{n_fmt}m/{total_fmt}m {postfix}"
@@ -92,6 +94,7 @@ def race_status_progress_bar(horses_dictionary):
         speed, distance = horses_dictionary[horse]
         if speed != 'D':
             bars[horse].n = min(distance, ALL_DISTANCE)
+            bars[horse].colour = COLOR[speed]
             bars[horse].set_postfix_str(
                 f"vitesse={speed}",
                 refresh=False
@@ -101,7 +104,7 @@ def race_status_progress_bar(horses_dictionary):
 
         else:
             bars[horse].n = distance
-            bars[horse].colour = "red"
+            bars[horse].colour = "RED"
             bars[horse].set_postfix_str(
                 "Disqualifier",
                 refresh=False
@@ -127,6 +130,7 @@ def loop_harness_racing(horses_dictionary):
         horses_dictionary, is_dq_or_arrived = next_lap(horses_dictionary, is_dq_or_arrived)
         time_race += 10
         print(f"Après {time_race // 60}'{time_race % 60}\" de course, voici l'état de la course:")
+        # You can choose between the “race_status” and “race_status_progress_bar” methods
         race_status_progress_bar(horses_dictionary)
 
         pre_ranking = sorted(
