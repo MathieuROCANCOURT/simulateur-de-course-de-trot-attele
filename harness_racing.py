@@ -149,6 +149,7 @@ def loop_harness_racing(horses_dictionary):
 
         input("Appuyer sur Entrée pour avancer la course.")
 
+    print("La course est terminée.")
     return ranking
 
 
@@ -163,7 +164,7 @@ def print_ranking(ranking, type_rank):
     top_ranking = dict_type[type_rank]
     for rank in range(top_ranking):
         output += str(ranking[rank]) + " - "
-    print(output[:-3])
+    print(f"Voici votre {type_rank}: {output[:-3]}")
 
 
 if __name__ == "__main__":
