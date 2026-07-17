@@ -133,6 +133,7 @@ def loop_harness_racing(horses_dictionary):
         # You can choose between the “race_status” and “race_status_progress_bar” methods
         race_status_progress_bar(horses_dictionary)
 
+        # Sort the horses in descending order of distance traveled.
         pre_ranking = sorted(
             ((horse, distance) for horse, (_, distance) in horses_dictionary.items() if
              not is_dq_or_arrived[int(horse) - 1] and int(distance) >= ALL_DISTANCE),
